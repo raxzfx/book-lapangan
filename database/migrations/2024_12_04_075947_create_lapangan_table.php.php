@@ -14,6 +14,7 @@ return new class extends Migration
         schema::create('lapangan', function (Blueprint $table) {
         $table->id();
         $table->string('nama_lapangan',255);
+        $table->foreignId('kategori_lapangan')->references('id')->on('kategori')->onDelete('cascade');
         $table->text('lokasi');
         $table->decimal('harga_perjam',10,2);
         $table->timestamps();  
