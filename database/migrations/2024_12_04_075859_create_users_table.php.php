@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',100);
             $table->string('email',100)->nullable();
             $table->string('password');
-            $table->enum('role',['admin','user'])->default('user');
+            $table->enum('role',['admin','user','ownerLapang'])->default('user');
             $table->integer('no_telp');
             $table->timestamps();
         });
