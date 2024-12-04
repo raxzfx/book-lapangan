@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+           'name',
+           'email',
+           ''
     ];
 
     /**
@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function Booking(){
+    return $this->hasMany(Booking::class,'user_id', 'id' );
 }
+}
+
+
