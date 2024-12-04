@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Nette\Schema\Schema as SchemaSchema;
 
 return new class extends Migration
 {
@@ -11,15 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('kategori', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100);
-            $table->string('email',100)->nullable();
-            $table->string('password');
-            $table->enum('role',['admin','user'])->default('user');
-            $table->integer('no_telp');
+            $table->string('kategori');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        //
     }
 };
