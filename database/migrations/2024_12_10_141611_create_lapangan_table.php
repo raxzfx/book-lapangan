@@ -17,6 +17,7 @@ return new class extends Migration
         $table->foreignId('kategori_lapangan')->references('id')->on('kategori')->onDelete('cascade');
         $table->text('lokasi');
         $table->decimal('harga_perjam',10,2);
+        $table->foreignId('fasilitas_lapangan')->references('id')->on('fasilitas')->onDelete('cascade');
         $table->timestamps();  
         });
      

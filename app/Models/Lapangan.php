@@ -12,6 +12,8 @@ class Lapangan extends Model
 
     public function Booking(){
         return $this->hasMany(Booking::class, 'lapangan_id','id');
+        return $this->belongsTo(Fasilitas::class, 'fasilitas_lapangan', 'id');
+        return $this->hasMany(OwnerLapangan::class, 'nama_lapangan', 'id');
     }
 
 }

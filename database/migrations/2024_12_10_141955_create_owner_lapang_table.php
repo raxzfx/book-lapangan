@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email');
-            $table->string('no_telp');
+            $table->integer('no_telp');
+            $table->foreignId('nama_lapangan')->references('id')->on('lapangan')->onDelete('cascade');
             $table->timestamps();
         });
     }

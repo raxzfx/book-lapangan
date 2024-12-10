@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');  // ID pengguna
             $table->foreignId('lapangan_id')->references('id')->on('lapangan')->onDelete('cascade');  // ID lapangan yang dipesan
+            $table->time('durasi');
+            $table->dateTime('tanggal_booking');
             $table->dateTime('waktu_mulai');  // Waktu mulai
             $table->dateTime('waktu_selesai');  // Waktu selesai
             $table->enum('status', ['pending', 'confirmed', 'cancelled']);  // Status pemesanan
