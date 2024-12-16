@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kategori;
 use Illuminate\Http\Request;
 
 class kategoriController
@@ -11,7 +12,8 @@ class kategoriController
      */
     public function index()
     {
-        return view ('admin.pages.kategori');
+        $kategori = kategori::all();
+        return view ('admin.pages.kategori',compact('kategori'));
     }
 
     /**
@@ -19,7 +21,7 @@ class kategoriController
      */
     public function create()
     {
-        //
+        return view('admin.form.kategoriAdd');
     }
 
     /**
@@ -27,7 +29,11 @@ class kategoriController
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'kategori' => 'required',
+        ]);
+        kategori::create($validate);
+        return redirect()->route('admin.pages.kategori');
     }
 
     /**
@@ -43,7 +49,8 @@ class kategoriController
      */
     public function edit(string $id)
     {
-        //
+        $kategori = kategori::findOrFail($id);
+        return view('admin.form.kategoriEdit',compact('kategori'));
     }
 
     /**
@@ -51,7 +58,12 @@ class kategoriController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kategori = kategori::findOrFail($id);
+        $validate = $request->validate([
+            'kategori' => 'required',
+        ]);
+        $kategori->update($validate);
+        return redirect()->route('admin.pages.kategori');
     }
 
     /**
@@ -59,6 +71,8 @@ class kategoriController
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = kategori::findOrFail($id);
+        $kategori->delete();
+        return redirect()->route('admin.pages.kategori');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 
 class FasilitasController
@@ -11,7 +12,8 @@ class FasilitasController
      */
     public function index()
     {
-        return view ('admin.pages.fasilitas');
+        $fasilitas = Fasilitas::all();
+        return view ('admin.pages.fasilitas',compact('fasilitas'));
     }
 
     /**
@@ -19,7 +21,7 @@ class FasilitasController
      */
     public function create()
     {
-        //
+        return view('admin.form.fasilitasAdd');
     }
 
     /**
@@ -27,7 +29,11 @@ class FasilitasController
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'fasilitas' => 'required',
+        ]);
+        Fasilitas::create($validate);
+        return redirect()->route('admin.pages.fasilitas');
     }
 
     /**
@@ -43,7 +49,8 @@ class FasilitasController
      */
     public function edit(string $id)
     {
-        //
+        $fasilitas = Fasilitas::find($id);
+        return view('admin.form.fasilitasEdit',compact('fasilitas'));
     }
 
     /**
@@ -51,7 +58,11 @@ class FasilitasController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            'fasilitas' => 'required',
+        ]);
+        Fasilitas::find($id)->update($validate);
+        return redirect()->route('admin.pages.fasilitas');
     }
 
     /**
@@ -59,6 +70,7 @@ class FasilitasController
      */
     public function destroy(string $id)
     {
-        //
+        Fasilitas::find($id)->delete();
+        return redirect()->route('admin.pages.fasilitas');
     }
 }

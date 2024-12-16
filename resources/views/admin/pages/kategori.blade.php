@@ -3,7 +3,7 @@
 @section('content')
 <h1>kategori</h1>
 <!--add data-->    
-<a href="#" class="btn btn-primary btn-icon-split mb-2 ">
+<a href="{{route('admin.form.createKategori')}}" class="btn btn-primary btn-icon-split mb-2 ">
     <span class="icon text-white-50">
         <i class="fas fa-plus"></i>
     </span>
@@ -21,9 +21,7 @@
                     <thead>
                         <tr>
                             <th>no</th>
-                            <th>nama</th>
-                            <th>email</th>
-                            <th>no telp</th>
+                            <th>kategori</th>
                             <th>action</th>
                           
                         </tr>
@@ -31,30 +29,36 @@
                     <tfoot>
                         <tr>
                             <th>no</th>
-                            <th>nama</th>
-                            <th>email</th>
-                            <th>no telp</th>
+                            <th>kategori</th>
                             <th>action</th>
                           
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>raul ajajajajararararararararar</td>
-                            <td>raul@gmail.com</td>
-                            <td>0808080808</td>
+
+                        @foreach ( $kategori as $kate )
+
+                             <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$kate->kategori}}</td>
                             <td> 
                                 <!--edit-->
-                                <a href="#" class="btn btn-success btn-circle">
+                                <a href="{{route('admin.form.editKategori', $kate->id)}}" class="btn btn-success btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->
-                                  <a href="#" class="btn btn-danger btn-circle">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <form action="{{ route('admin.form.deleteKategori', $kate->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-circle">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                         </td>
                         </tr>
+
+                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>
