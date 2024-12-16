@@ -4,7 +4,7 @@
 <h1 class="mb-3">user</h1>
 
 <!--add data-->    
-<a href="#" class="btn btn-primary btn-icon-split mb-2 ">
+<a href="{{route('admin.form.create')}}" class="btn btn-primary btn-icon-split mb-2 ">
     <span class="icon text-white-50">
         <i class="fas fa-plus"></i>
     </span>
@@ -40,25 +40,34 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($users as $user)
                         <tr>
-                            <td>1</td>
-                            <td>raul ajajajajararararararararar</td>
-                            <td>raul@gmail.com</td>
-                            <td>0808080808</td>
+                            <td scope="row" >{{$loop->iteration}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->no_telp}}</td>
                             <td> 
                                 <!--edit-->
-                                <a href="#" class="btn btn-success btn-circle">
+                                <a href="{{route('admin.form.UserEdit',$user->id)}}" class="btn btn-success btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->
-                                  <a href="#" class="btn btn-danger btn-circle">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <form action="{{ route('admin.form.UserDelete', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-circle">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                                
                         </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
+        
             </div>
         </div>
     </div>
+   
 @endsection
