@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lapangan;
+use App\Models\kategori;
+use App\Models\Fasilitas;
+
 
 class LapanganController
 {
@@ -11,6 +15,7 @@ class LapanganController
      */
     public function index()
     {
+        $lapangan = Lapangan::with(['fasilitas','kategori'])->get();
         return view ('admin.pages.lapangan');
     }
 

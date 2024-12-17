@@ -44,12 +44,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('fasilitas/{id}/editFasilitas',[FasilitasController::class, 'edit'])->name('form.editFasilitas');
     //untuk delete data fasilitas
     Route::delete('fasilitas/{id}',[FasilitasController::class, 'destroy'])->name('form.deleteFasilitas');
-    
 
-
-
-
+    //untuk menampilkan tabel lapangan
     Route::get('lapangan', [LapanganController::class, 'index'])->name('pages.lapangan');
+    //untuk create data lapangan
+    Route::get('lapangan/create',[LapanganController::class, 'create'])->name('form.createLapangan');
+    Route::post('lapangan/store',[LapanganController::class, 'store'])->name('form.storeLapangan');
+    //untuk update data lapangan
+    Route::put('lapangan/{id}/update',[LapanganController::class, 'update'])->name('form.updateLapangan');
+    Route::get('lapangan/{id}/edit',[LapanganController::class, 'edit'])->name('form.editLapangan');    
+    //untuk delete data lapangan
+    Route::delete('lapangan/{id}',[LapanganController::class, 'destroy'])->name('form.deleteLapangan');
+
+
+
     Route::get('ownerLapang', [OwnerLapangController::class, 'index'])->name('pages.ownerLapang');
  
 });
+
+

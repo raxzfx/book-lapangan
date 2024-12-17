@@ -3,7 +3,7 @@
 @section('content')
 <h1>lapangan</h1>
 <!--add data-->    
-<a href="#" class="btn btn-primary btn-icon-split mb-2 ">
+<a href="{{route('admin.form.createLapangan')}}" class="btn btn-primary btn-icon-split mb-2 ">
     <span class="icon text-white-50">
         <i class="fas fa-plus"></i>
     </span>
@@ -43,13 +43,15 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>raul ajajajajararararararararar</td>
-                            <td>raul@gmail.com</td>
-                            <td>0808080808</td>
-                            <td>bandung</td>
-                            <td>500.000</td>
+
+                        @foreach ($ as $lapang )
+                             <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$lapang->nama_lapangan}}</td>
+                            <td>{{ $lapang->kategori->kategori ?? 'Tidak ada kategori' }}</td>
+                            <td>{{ $lapang->fasilitas->fasilitas ?? 'Tidak ada fasilitas' }}</td>
+                            <td>{{$lapang->lokasi}}</td>
+                            <td>{{$lapang->harga_perjam}}</td>
                             <td> 
                                 <!--edit-->
                                 <a href="#" class="btn btn-success btn-circle">
@@ -61,6 +63,9 @@
                             </a>
                         </td>
                         </tr>
+                        @endforeach
+
+                       
                     </tbody>
                 </table>
             </div>
