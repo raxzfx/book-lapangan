@@ -7,7 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LapanganController;
-use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\OwnerLapangController;
 
@@ -52,16 +51,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //untuk delete data kategori
     Route::delete('kategori/{id}',[kategoriController::class, 'destroy'])->name('form.deleteKategori');
 
-    //untuk menampilkan tabel fasilitas
-    Route::get('fasilitas', [FasilitasController::class, 'index'])->name('pages.fasilitas');
-    //untuk create data fasilitas
-    Route::get('fasilitas/create',[FasilitasController::class, 'create'])->name('form.createFasilitas');
-    Route::post('fasilitas/store',[FasilitasController::class, 'store'])->name('form.storeFasilitas');
-    //untuk update data fasilitas
-    Route::put('fasilitas/{id}/updateFasilitas',[FasilitasController::class, 'update'])->name('form.updateFasilitas');
-    Route::get('fasilitas/{id}/editFasilitas',[FasilitasController::class, 'edit'])->name('form.editFasilitas');
-    //untuk delete data fasilitas
-    Route::delete('fasilitas/{id}',[FasilitasController::class, 'destroy'])->name('form.deleteFasilitas');
 
     //untuk menampilkan tabel lapangan
     Route::get('lapangan', [LapanganController::class, 'index'])->name('pages.lapangan');
@@ -74,10 +63,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //untuk delete data lapangan
     Route::delete('lapangan/{id}',[LapanganController::class, 'destroy'])->name('form.deleteLapangan');
 
-
-
+    //untuk menampilkan tabel owner lapangan
     Route::get('ownerLapang', [OwnerLapangController::class, 'index'])->name('pages.ownerLapang');
-    Route::get('ownerLapang/create',[OwnerLapangController::class, 'create'])->name('form.createOwnerLapang');
+    //untuk menampilkan form sekaligus fungsinya
+    Route::get('ownerLapang/create',[OwnerLapangController::class, 'create'])->name('form.createOwner');
+    Route::post('ownerLapang/store',[OwnerLapangController::class, 'store'])->name('form.storeOwner');
+    //untuk menampilkan form sekaligus update
+    Route::put('ownerLapang/{id}/updateOwner',[OwnerLapangController::class, 'update'])->name('form.updateOwner');
+    Route::get('ownerLapang/{id}/editOwner',[OwnerLapangController::class, 'edit'])->name('form.editOwner');    
+    //untuk menampilkan form sekaligus delete
+    Route::delete('ownerLapang/{id}',[OwnerLapangController::class, 'destroy'])->name('form.deleteOwner');
 
     Route::get('bookingManage',[BookingController::class, 'index'])->name('pages.bookingManage');
  

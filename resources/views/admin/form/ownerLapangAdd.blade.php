@@ -6,13 +6,13 @@
  <div class="card shadow mb-4">
   
     <div class="card-body">
-        <form class=" g-3 needs-validation" action="{{route('admin.form.store')}}" method="POST"  novalidate>
+        <form class=" g-3 needs-validation" action="{{route('admin.form.storeOwner')}}" method="POST"  novalidate>
 
             @csrf
 
             <div class="col-md-12 mb-2">
               <label for="validationCustom01" class="form-label">nama</label>
-              <input type="text" class="form-control" id="validationCustom01" value="" name="name" required>
+              <input type="text" class="form-control" id="validationCustom01" value="" name="nama" required>
               <div class="valid-feedback">
                 success!
               </div>
@@ -43,21 +43,22 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 mb-4">
-                <label for="role" class="form-label">nama lapang</label>
-                <select class="form-control" id="role" name="role" required>
-                  <option value="" disabled selected>Pilih lapangan</option>
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                  <option value="ownerLapang">Owner Lapang</option>
-                </select>
-                <div class="valid-feedback">
-                 success!
-                </div>
-                <div class="invalid-feedback">
-               silahkan pilih role yang tepat!
-                </div>
+
+            <div class="col-md-12 mb-2">
+              <label for="kategori_lapangan" class="form-label">Lapangan</label>
+              <select class="form-control" id="kategori_lapangan" name="nama_lapangan" required>
+                <option value="" disabled selected>Pilih lapangan</option>
+                @foreach($lapangan as $lapang)
+                  <option value="{{$lapang->id}}">{{$lapang->nama_lapangan}}</option>
+                @endforeach
+              </select>
+              <div class="valid-feedback">
+                Success!
               </div>
+              <div class="invalid-feedback">
+                Silakan pilih kategori lapangan!
+              </div>
+            </div>
               
             <div class="col-12 mb-2">
               <div class="form-check">

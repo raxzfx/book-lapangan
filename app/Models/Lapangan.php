@@ -14,8 +14,8 @@ class Lapangan extends Model
         return $this->hasMany(Booking::class, 'lapangan_id','id');
     }
 
-    public function fasilitas(){
-        return $this->belongsTo(Fasilitas::class, 'fasilitas_lapangan', 'id');
+    public function kategori(){
+        return $this->belongsTo(kategori::class, 'kategori_lapangan','id');
     }
 
     public function ownerLapangan(){

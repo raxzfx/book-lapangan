@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ownerLapangan;
+use App\Models\lapangan;
 use Illuminate\Http\Request;
 
 class OwnerLapangController
@@ -12,8 +13,9 @@ class OwnerLapangController
      */
     public function index()
     {
-        $owner = ownerLapangan::paginate(10);
-        return view ('admin.pages.ownerLapang');
+
+        $ownerLapang = ownerLapangan::with('Lapangan')->paginate(10);
+        return view ('admin.pages.ownerLapang',compact('ownerLapang'));
     }
 
     /**
@@ -21,7 +23,8 @@ class OwnerLapangController
      */
     public function create()
     {
-        return view('admin.form.ownerLapangAdd');
+        $lapangan = lapangan::all();
+        return view('admin.form.ownerLapangAdd',compact('lapangan'));
     }
 
     /**
@@ -29,7 +32,21 @@ class OwnerLapangController
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'no_telp' => 'required',
+            'nama_lapangan' => 'required',
+        ]);
+
+        ownerLapangan::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'nama_lapangan' => $request->nama_lapangan,
+        ]);
+
+        return redirect()->route('admin.pages.ownerLapang')->with('success','owner lapangan sukses di buat');
     }
 
     /**
@@ -45,7 +62,9 @@ class OwnerLapangController
      */
     public function edit(string $id)
     {
-        return view('admin.form.fasilitasEdit');
+        $lapangan = lapangan::all();
+        $ownerLapangs = ownerLapangan::find($id);
+        return view('admin.form.ownerLapangEdit',compact('ownerLapangs','lapangan'));
     }
 
     /**
@@ -53,7 +72,22 @@ class OwnerLapangController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'no_telp' => 'required',
+            'nama_lapangan' => 'required',
+        ]);
+
+        $ownerLapang = ownerLapangan::find($id);
+        $ownerLapang->update([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'nama_lapangan' => $request->nama_lapangan,
+        ]);
+
+        return redirect()->route('admin.pages.ownerLapang')->with('success','owner lapangan sukses di ubah');
     }
 
     /**
@@ -61,6 +95,8 @@ class OwnerLapangController
      */
     public function destroy(string $id)
     {
-        //
+        $ownerLapang = ownerLapangan::find($id);
+        $ownerLapang->delete();
+        return redirect()->route('admin.pages.ownerLapang')->with('success','owner lapangan sukses di hapus');
     }
 }

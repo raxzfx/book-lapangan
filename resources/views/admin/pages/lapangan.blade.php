@@ -23,7 +23,6 @@
                             <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
-                            <th>fasilitas</th>
                             <th>lokasi</th>
                             <th>harga/jam</th>
                             <th>action</th>
@@ -35,7 +34,6 @@
                             <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
-                            <th>fasilitas</th>
                             <th>lokasi</th>
                             <th>harga/jam</th>
                             <th>action</th>
@@ -44,31 +42,64 @@
                     </tfoot>
                     <tbody>
 
-                        {{-- @foreach ($ as $lapang ) --}}
+                        @foreach ($lapangan as $lapang )
                              <tr>
-                            <td style="width: 3%;"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="width: 3%;">{{$loop->iteration}}</td>
+                            <td> {{$lapang->nama_lapangan}} </td>
+                            <td> {{$lapang->kategori->kategori}} </td>
+                            <td> {{$lapang->lokasi}} </td>
+                            <td> {{$lapang->harga_perjam}} </td>
                             <td> 
                                 <!--edit-->
-                                <a href="" class="btn btn-success btn-circle">
+                                <a href="{{route('admin.form.editLapangan', $lapang->id)}}" class="btn btn-success btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->
-                                  <a href="#" class="btn btn-danger btn-circle">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <form action="{{ route('admin.form.deleteLapangan', $lapang->id) }}" method="POST" class="form-delete d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-danger btn-circle btn-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                         </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
 
                        
                     </tbody>
                 </table>
+
+                {{$lapangan->links('')}}
+
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        // Menangani tombol delete dengan SweetAlert2
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault(); // Mencegah form submit langsung
+    
+                // Menampilkan konfirmasi dengan SweetAlert2
+                Swal.fire({
+                    title: "Apa kamu yakin?",
+                    text: "Kamu akan menghapus data ini!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Delete!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika user mengonfirmasi, submit form untuk menghapus data
+                        this.closest('form').submit(); // Menyubmit form
+                    }
+                });
+            });
+        });
+    
+    </script>
+    @endpush
 @endsection

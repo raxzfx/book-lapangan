@@ -67,7 +67,6 @@
                         <a class="collapse-item" href="{{route('admin.pages.users')}}">users</a>
                         <a class="collapse-item" href="{{route('admin.pages.lapangan')}}">lapangan</a>
                         <a class="collapse-item" href="{{route('admin.pages.ownerLapang')}}">owner lapang</a>
-                        <a class="collapse-item" href="{{route('admin.pages.fasilitas')}}">fasilitas</a>
                         <a class="collapse-item" href="{{route('admin.pages.kategori')}}">kategori</a>
                     </div>
                 </div>
