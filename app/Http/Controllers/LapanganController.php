@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lapangan;
-use App\Models\kategori;
-use App\Models\Fasilitas;
+     
 
 
 class LapanganController
@@ -15,7 +14,7 @@ class LapanganController
      */
     public function index()
     {
-        $lapangan = Lapangan::with(['fasilitas','kategori'])->get();
+       $validate = Lapangan::paginate(10);
         return view ('admin.pages.lapangan');
     }
 
@@ -24,7 +23,7 @@ class LapanganController
      */
     public function create()
     {
-        //
+        return view('admin.form.lapanganAdd');
     }
 
     /**
@@ -48,7 +47,7 @@ class LapanganController
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.form.lapanganEdit');
     }
 
     /**

@@ -21,7 +21,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>no</th>
+                            <th style="width: 3%;">no</th>
                             <th>nama</th>
                             <th>email</th>
                             <th>no telp</th>
@@ -31,7 +31,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>no</th>
+                            <th style="width: 3%;">no</th>
                             <th>nama</th>
                             <th>email</th>
                             <th>no telp</th>
@@ -42,20 +42,20 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                            <td scope="row" >{{$loop->iteration}}</td>
+                            <td scope="row" style="width: 3%;">{{$loop->iteration}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->no_telp}}</td>
                             <td> 
                                 <!--edit-->
-                                <a href="{{route('admin.form.UserEdit',$user->id)}}" class="btn btn-success btn-circle">
+                                <a href="{{route('admin.form.UserEdit',$user->id)}}" class="btn btn-success btn-circle ">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->
-                                <form action="{{ route('admin.form.UserDelete', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                <form action="{{ route('admin.form.UserDelete', $user->id) }}" method="POST" class="form-delete d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-circle">
+                                    <button type="button" class="btn btn-danger btn-circle btn-delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -66,8 +66,40 @@
                     </tbody>
                 </table>
         
+           
+                {{$users->links('')}}
+             
+
             </div>
         </div>
     </div>
-   
+
+    @push('scripts')
+    <script>
+        // Menangani tombol delete dengan SweetAlert2
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault(); // Mencegah form submit langsung
+    
+                // Menampilkan konfirmasi dengan SweetAlert2
+                Swal.fire({
+                    title: "Apa kamu yakin?",
+                    text: "Kamu akan menghapus data ini!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Delete!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika user mengonfirmasi, submit form untuk menghapus data
+                        this.closest('form').submit(); // Menyubmit form
+                    }
+                });
+            });
+        });
+    
+    </script>
+    @endpush
+    
 @endsection

@@ -23,9 +23,9 @@
               <label for="kategori_lapangan" class="form-label">Kategori Lapangan</label>
               <select class="form-control" id="kategori_lapangan" name="kategori_lapangan" required>
                 <option value="" disabled selected>Pilih kategori lapangan</option>
-                @foreach($kategori as $kategori)
-                  <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
-                @endforeach
+                {{-- @foreach($kategori as $kategori) --}}
+                  <option value=""></option>
+                {{-- @endforeach --}}
               </select>
               <div class="valid-feedback">
                 Success!
@@ -64,12 +64,12 @@
            <div class="col-md-12 mb-2">
             <label class="form-label">Fasilitas Lapangan</label>
             <div class="form-check">
-              @foreach($fasilitas as $fasilitas)
-                <input class="form-check-input" type="checkbox" value="{{ $fasilitas->id }}" id="fasilitas_{{ $fasilitas->id }}" name="fasilitas_lapangan[]">
-                <label class="form-check-label" for="fasilitas_{{ $fasilitas->id }}">
-                  {{ $fasilitas->fasilitas }}
+              {{-- @foreach($fasilitas as $fasilitas) --}}
+                <input class="form-check-input" type="checkbox" value="" id="fasilitas_" name="fasilitas_lapangan[]">
+                <label class="form-check-label" for="fasilitas_">
+                  wc
                 </label><br>
-              @endforeach
+              {{-- @endforeach --}}
             </div>
             <div class="valid-feedback">
               Success!

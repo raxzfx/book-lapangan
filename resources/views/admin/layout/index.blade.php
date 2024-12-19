@@ -9,8 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 @yield('title')</title>
-
+    <title>@yield('title')</title>
+    
+  @vite(['resources/js/app.js'])
+  
     <!-- Custom fonts for this template-->
     <link href="{{asset('/assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
@@ -19,6 +21,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('/assets/css/sb-admin-2.css')}}" rel="stylesheet">
+
+  
 
 </head>
 
@@ -31,11 +35,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.pages.index')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">eBooking</div>
+                <div class="sidebar-brand-text mx-3">sportify</div>
             </a>
 
             <!-- Divider -->
@@ -71,7 +75,7 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{route('admin.pages.bookingManage')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Booking management</span></a>
             </li>
@@ -346,6 +350,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+
+
+
+        @stack('scripts') 
+
+
+   
 
 </body>
 

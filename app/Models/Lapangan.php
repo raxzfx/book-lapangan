@@ -22,5 +22,8 @@ class Lapangan extends Model
         return $this->hasMany(OwnerLapangan::class, 'nama_lapangan', 'id');
     }
 
+    public function dashboard(){
+        return $this->hasMany(Dashboard::class, 'lapangan_id', 'id' );
+    }
 }
 

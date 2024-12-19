@@ -12,7 +12,7 @@ class FasilitasController
      */
     public function index()
     {
-        $fasilitas = Fasilitas::all();
+        $fasilitas = Fasilitas::paginate(10);
         return view ('admin.pages.fasilitas',compact('fasilitas'));
     }
 

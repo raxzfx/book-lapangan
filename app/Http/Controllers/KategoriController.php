@@ -12,7 +12,7 @@ class kategoriController
      */
     public function index()
     {
-        $kategori = kategori::all();
+        $kategori = kategori::paginate(10);
         return view ('admin.pages.kategori',compact('kategori'));
     }
 

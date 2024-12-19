@@ -1,14 +1,32 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LapanganController;
-use App\Http\Controllers\OwnerLapangController;
-use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\FasilitasController;
-use App\Models\User;
+use App\Http\Controllers\kategoriController;
+use App\Http\Controllers\OwnerLapangController;
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//admin
 Route::prefix('admin')->name('admin.')->group(function () {
     //untuk menampilkan tabel user
     Route::get('users', [UsersController::class, 'index'])->name('pages.users');
@@ -59,7 +77,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
     Route::get('ownerLapang', [OwnerLapangController::class, 'index'])->name('pages.ownerLapang');
+    Route::get('ownerLapang/create',[OwnerLapangController::class, 'create'])->name('form.createOwnerLapang');
+
+    Route::get('bookingManage',[BookingController::class, 'index'])->name('pages.bookingManage');
  
 });
 
 
+require __DIR__.'/auth.php';

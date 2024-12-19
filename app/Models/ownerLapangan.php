@@ -12,4 +12,7 @@ class ownerLapangan extends Model
     public function ownerLapangan(){
        return $this->belongsTo(Lapangan::class, 'nama_lapangan', 'id');
     }
+    public function dashboard(){
+        return $this->hasMany(Dashboard::class, 'owner_id', 'id' );
+    }
 }

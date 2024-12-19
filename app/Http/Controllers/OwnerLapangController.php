@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ownerLapangan;
 use Illuminate\Http\Request;
 
 class OwnerLapangController
@@ -11,6 +12,7 @@ class OwnerLapangController
      */
     public function index()
     {
+        $owner = ownerLapangan::paginate(10);
         return view ('admin.pages.ownerLapang');
     }
 
@@ -19,7 +21,7 @@ class OwnerLapangController
      */
     public function create()
     {
-        //
+        return view('admin.form.ownerLapangAdd');
     }
 
     /**
@@ -43,7 +45,7 @@ class OwnerLapangController
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.form.fasilitasEdit');
     }
 
     /**

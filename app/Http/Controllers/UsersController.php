@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController
 {
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         return view('admin.pages.users', compact('users'));
     }
 

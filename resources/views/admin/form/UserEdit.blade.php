@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 @section('title','add user')
 @section('content')
-<h1>add user</h1>
+<h1>edit user</h1>
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
   

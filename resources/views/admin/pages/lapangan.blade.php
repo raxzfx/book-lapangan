@@ -13,14 +13,14 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data lapangan</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>no</th>
+                            <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
                             <th>fasilitas</th>
@@ -32,7 +32,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>no</th>
+                            <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
                             <th>fasilitas</th>
@@ -44,17 +44,17 @@
                     </tfoot>
                     <tbody>
 
-                        @foreach ($ as $lapang )
+                        {{-- @foreach ($ as $lapang ) --}}
                              <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$lapang->nama_lapangan}}</td>
-                            <td>{{ $lapang->kategori->kategori ?? 'Tidak ada kategori' }}</td>
-                            <td>{{ $lapang->fasilitas->fasilitas ?? 'Tidak ada fasilitas' }}</td>
-                            <td>{{$lapang->lokasi}}</td>
-                            <td>{{$lapang->harga_perjam}}</td>
+                            <td style="width: 3%;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td> 
                                 <!--edit-->
-                                <a href="#" class="btn btn-success btn-circle">
+                                <a href="" class="btn btn-success btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->
@@ -63,7 +63,7 @@
                             </a>
                         </td>
                         </tr>
-                        @endforeach
+                        {{-- @endforeach --}}
 
                        
                     </tbody>
