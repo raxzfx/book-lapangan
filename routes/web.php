@@ -9,6 +9,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\OwnerLapangController;
+use App\Http\Controllers\owner\DashboardOwnerController;
 
 
 Route::get('/', function () {
@@ -76,6 +77,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('bookingManage',[BookingController::class, 'index'])->name('pages.bookingManage');
  
+});
+
+
+Route::prefix('owner')->name('owner.')->group(function () {
+   //untuk menampilkan dashboard owner lapang
+   Route::get('pages/index',[DashboardOwnerController::class, 'index'])->name('pages.index'); 
 });
 
 
