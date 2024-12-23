@@ -7,6 +7,7 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        "./node_modules/flowbite/**/*.js"
     ],
 
     theme: {
@@ -14,8 +15,22 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backdropBlur: {
+                'custom': '9px', // Gantilah '10px' dengan nilai sembarang sesuai keinginan Anda
+              },
+              width:{
+                'custom':'800px',
+              },
+              rotate: {
+                '270': '270deg',
+              },
+              top:{
+                'custom' : '5rem',
+              },
         },
     },
 
-    plugins: [forms],
+    plugins: [forms,
+        require('flowbite/plugin')
+    ],
 };

@@ -10,7 +10,8 @@ use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\kategoriController;
 use App\Http\Controllers\OwnerLapangController;
 use App\Http\Controllers\owner\DashboardOwnerController;
-
+use App\Http\Controllers\user\HomepageController;
+use App\Http\Controllers\user\DetailLapang;
 
 Route::get('/', function () {
     return view('welcome');
@@ -83,6 +84,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('owner')->name('owner.')->group(function () {
    //untuk menampilkan dashboard owner lapang
    Route::get('pages/index',[DashboardOwnerController::class, 'index'])->name('pages.index'); 
+});
+
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('pages/index',[HomepageController::class,'index'])->name('pages.index');
+    Route::get('pages/detailLapang',[DetailLapang::class, 'index'])->name('pages.detailLapang');
 });
 
 
