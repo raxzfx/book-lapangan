@@ -12,7 +12,7 @@
 <body class="bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white">
     
 <!-- Navbar -->
-<nav class="bg-slate-500 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 bg-opacity-20 backdrop-filter backdrop-blur-custom text-slate-200  px-5">
+<nav class="bg-green-600 shadow-md dark:bg-gray-900 fixed w-full z-20 top-0 start-0 text-slate-200  px-5">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5 ">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Sportify</span>
@@ -99,7 +99,7 @@
 
 <!-- Footer -->
 
-<footer class="bg-black text-white">
+<footer class="bg-green-800 text-white">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">

@@ -13,19 +13,8 @@ use App\Http\Controllers\owner\DashboardOwnerController;
 use App\Http\Controllers\user\HomepageController;
 use App\Http\Controllers\user\DetailLapang;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomepageController::class, 'index'])->name('user.pages.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 //admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -87,7 +76,6 @@ Route::prefix('owner')->name('owner.')->group(function () {
 });
 
 Route::prefix('user')->name('user.')->group(function () {
-    Route::get('pages/index',[HomepageController::class,'index'])->name('pages.index');
     Route::get('pages/detailLapang',[DetailLapang::class, 'index'])->name('pages.detailLapang');
 });
 
