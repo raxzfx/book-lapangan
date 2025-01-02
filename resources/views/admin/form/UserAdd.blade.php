@@ -30,26 +30,18 @@
                silahkan masukan email anda!
               </div>
             </div>
-            <div class="col-md-12 mb-2 ">
-              <label for="validationCustomUsername" class="form-label">no telp</label>
-              <div class="input-group has-validation">
-                
-                <input type="number" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" name="no_telp" required>
-                <div class="valid-feedback">
-                    success!
-                  </div>
-                <div class="invalid-feedback">
-                 silahkan masukan no telp anda!
-                </div>
-              </div>
-            </div>
+
+         
+           
             <div class="col-md-12 mb-4">
                 <label for="role" class="form-label">Role</label>
                 <select class="form-control" id="role" name="role" required>
                   <option value="" disabled selected>Pilih role</option>
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                  <option value="ownerLapang">Owner Lapang</option>
+                  @foreach ($roleOption as $role )
+                     <option value="{{$role}}">{{$role}}</option>
+                  @endforeach
+                 
+
                 </select>
                 <div class="valid-feedback">
                  success!

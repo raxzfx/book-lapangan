@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lapangan;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -12,7 +13,8 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        return view ('user.pages.index');
+        $lapangan = Lapangan::with('kategori')->get();
+        return view ('user.pages.index', compact('lapangan'));
     }
 
     /**

@@ -18,7 +18,7 @@
                             <th>nama user</th>
                             <th>nama lapangan</th>
                             <th>status</th>
-                            <th>payment status</th>
+                         
                         
                           
                         </tr>
@@ -29,29 +29,30 @@
                             <th>nama user</th>
                             <th>nama lapangan</th>
                             <th>status</th>
-                            <th>payment status</th>
+                         
                           
                           
                         </tr>
                     </tfoot>
                     <tbody>
-                        {{-- @foreach ($users as $user) --}}
+                        @foreach ($booking as $book)
                         <tr>
-                            <td scope="row" style="width: 3%;">1</td>
-                            <td>rasya</td>
-                            <td>pursenif</td>
+                            <td scope="row" style="width: 3%;">{{$loop->iteration}}</td>
+                            <td>{{$book->nama_pemesan}}</td>
+                            <td>{{$book->lapangan->nama_lapangan}}</td>
                             <td>
-                                <button type="button" class="btn btn-warning btn-sm" >pending</button>
-                                <button type="button" class="btn btn-success btn-sm" >confirmed</button>
-                                <button type="button" class="btn btn-danger btn-sm" >cancel</button>
-                            </td>
-                            <td><button type="button" class="btn btn-success btn-sm" >Paid</button>
-                                <button type="button" class="btn btn-danger btn-sm" >Pending</button>
+                                @if ($book->status === "pending")
+                                        <span class="badge badge-warning badge-sm" >pending</span>
+                                @elseif($book->status === 'confirmed')
+                                  <span class="badge badge-success badge-sm" >confirmed</span>
+                                  @elseif ($book->status === 'cancelled')
+                                 <span class="badge badge-danger badge-sm" >cancel</span>
+                                @endif         
                             </td>
                            
                            
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
         

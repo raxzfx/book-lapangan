@@ -23,7 +23,10 @@
                             <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
+                            <th>kota</th>
                             <th>lokasi</th>
+                            <th>deskripsi</th>
+                            <th>gambar</th>
                             <th>harga/jam</th>
                             <th>action</th>
                           
@@ -34,7 +37,10 @@
                             <th style="width: 3%;">no</th>
                             <th>nama lapangan</th>
                             <th>kategori</th>
+                            <th>kota</th>
                             <th>lokasi</th>
+                            <th>deskripsi</th>
+                            <th>gambar</th>
                             <th>harga/jam</th>
                             <th>action</th>
                           
@@ -47,11 +53,20 @@
                             <td style="width: 3%;">{{$loop->iteration}}</td>
                             <td> {{$lapang->nama_lapangan}} </td>
                             <td> {{$lapang->kategori->kategori}} </td>
+                            <td> {{$lapang->kota}} </td>
                             <td> {{$lapang->lokasi}} </td>
-                            <td> {{$lapang->harga_perjam}} </td>
+                            <td class="truncate">{{$lapang->deskripsi}}</td>
+                            <td>
+                                @if($lapang->image)
+                                <img src="{{ asset('uploads/lapangan/' . $lapang->image) }}" alt="Gambar Lapangan" style="width: 150px; height: 100px;">
+                            @else
+                                <span>Tidak ada gambar</span>
+                            @endif
+                            </td>
+                            <td> Rp. {{ number_format($lapang->harga_perjam, 0, ',', '.') }} </td>
                             <td> 
                                 <!--edit-->
-                                <a href="{{route('admin.form.editLapangan', $lapang->id)}}" class="btn btn-success btn-circle">
+                                <a href="{{route('admin.form.editLapangan', $lapang->id)}}" class="btn btn-success btn-circle mb-1">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!--delete-->

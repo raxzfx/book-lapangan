@@ -38,12 +38,12 @@
                         <td>rasya</td>
                         <td>pursenif</td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-sm" >pending</button>
-                            <button type="button" class="btn btn-success btn-sm" >confirmed</button>
-                            <button type="button" class="btn btn-danger btn-sm" >cancel</button>
+                            <span class="badge badge-warning badge-sm" >pending</span>
+                            <span class="badge badge-success badge-sm" >confirmed</span>
+                            <span class="badge badge-danger badge-sm" >cancel</span>
                         </td>
-                        <td><button type="button" class="btn btn-success btn-sm" >Paid</button>
-                            <button type="button" class="btn btn-danger btn-sm" >Pending</button>
+                        <td><span class="badge badge-success badge-sm" >Paid</span>
+                            <span class="badge badge-danger badge-sm" >Pending</span>
                         </td>
                        
                        

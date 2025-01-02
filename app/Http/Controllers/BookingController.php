@@ -12,8 +12,8 @@ class BookingController
      */
     public function index()
     {
-        $validate = Booking::paginate(10);
-        return view('admin.pages.bookingManage');
+        $booking = Booking::with('lapangan')->paginate(10);
+        return view('admin.pages.bookingManage',compact('booking'));
     }
 
     /**

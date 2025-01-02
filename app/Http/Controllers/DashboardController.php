@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Lapangan;
 use Illuminate\Http\Request;
 
 class DashboardController
@@ -11,7 +13,9 @@ class DashboardController
      */
     public function index()
     {
-        return view('admin.pages.index');
+        $totaluser = User::count();
+        $totalLapang = Lapangan::count();
+        return view('admin.pages.index',compact('totaluser','totalLapang'));
     }
 
     /**

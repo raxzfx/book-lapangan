@@ -23,7 +23,8 @@ class UsersController
      */
     public  function create()
     {
-        return view('admin.form.UserAdd');
+        $roleOption = ['admin' ,'ownerLapang'];
+        return view('admin.form.UserAdd',compact('roleOption'));
     }
 
     /**
@@ -34,8 +35,8 @@ class UsersController
         $validate = $request->validate([
           'name' => 'required',
           'email' => 'required', 
-          'role' => 'required',
-          'no_telp' => 'required',
+          'role' => 'required|in:admin,ownerLapang',
+          'password' => 'nullable|min:8',
         ]);
 
         User::create([
@@ -43,7 +44,6 @@ class UsersController
             'email' => $request->email,
             'password' => Hash::make('12345678'),
             'role' => $request->role,
-            'no_telp' => $request->no_telp
         ]);
 
         return redirect()->route('admin.pages.users')->with('success','user berhasil di tambah');
@@ -62,27 +62,44 @@ class UsersController
      */
     public function edit(string $id)
     {
-        $user = user::findOrFail($id);
-        return view ('admin.form.UserEdit',compact('user'));
+        $user = User::findOrFail($id); // Temukan data user berdasarkan ID
+        $roleOption = ['admin', 'ownerLapang']; // Pilihan role
+        return view('admin.form.UserEdit', compact('user', 'roleOption'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+    
+        // Validasi data yang diterima
         $validate = $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'nullable',
+            'email' => 'required|email',
             'no_telp' => 'required',
-            'role' => 'required'
+            'role' => 'required|in:admin,ownerLapang', // Pastikan role valid
+            'password' => 'nullable|min:8', // Password opsional
         ]);
-        $user->update($validate);
-        return redirect()->route('admin.pages.users');
+    
+        // Update data user
+        $user->name = $validate['name'];
+        $user->email = $validate['email'];
+        $user->no_telp = $validate['no_telp'];
+        $user->role = $validate['role'];
+    
+        // Update password hanya jika diisi
+        if (!empty($validate['password'])) {
+            $user->password = Hash::make($validate['password']);
+        }
+    
+        $user->save(); // Simpan perubahan ke database
+    
+        return redirect()->route('admin.pages.users')->with('success', 'Data user berhasil diupdate!');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */

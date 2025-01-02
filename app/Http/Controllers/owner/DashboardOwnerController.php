@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\owner;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class DashboardOwnerController extends Controller
@@ -12,7 +13,10 @@ class DashboardOwnerController extends Controller
      */
     public function index()
     {
-        return view('owner.pages.index');
+        $pendingcount = Booking::where('status', 'pending')->count();
+        $confirmedcount = Booking::where('status', 'confirmed')->count();
+        $cancelcount = Booking::where('status', 'cancelled')->count();
+        return view('owner.pages.index', compact('pendingcount','confirmedcount','cancelcount'));
     }
 
     /**

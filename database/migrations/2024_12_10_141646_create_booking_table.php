@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('booking', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');  // ID pengguna
+            $table->string('nama_pemesan');
             $table->foreignId('lapangan_id')->references('id')->on('lapangan')->onDelete('cascade');  // ID lapangan yang dipesan
-            $table->time('durasi');
-            $table->dateTime('tanggal_booking');
-            $table->dateTime('waktu_mulai');  // Waktu mulai
-            $table->dateTime('waktu_selesai');  // Waktu selesai
-            $table->enum('status', ['pending', 'confirmed', 'cancelled']);  // Status pemesanan
+            $table->integer('durasi');
+            $table->date('tanggal_booking');
+            $table->time('waktu_mulai');  // Waktu mulai
+            $table->time('waktu_selesai');  // Waktu selesai
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');  // Status pemesanan
             $table->enum('payment_status', ['pending', 'paid'])->default('pending');  // Status pembayaran
+            $table->foreignId('harga_id')->nullable()->references('id')->on('lapangan')->onDelete('cascade');
+            $table->string("kode_booking",6)->unique();
+            $table->string('kode_pembayaran',6)->unique();
             $table->timestamps();
         });
         

@@ -20,7 +20,6 @@ class User extends Authenticatable
     protected $fillable = [
            'name',
            'email',
-           'no_telp',
            'password',
     ];
 
@@ -46,9 +45,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function Booking(){
-    return $this->hasMany(Booking::class,'user_id', 'id' );
-}
+ 
 public function dashboard(){
  return $this->hasMany(Dashboard::class,'user_id', 'id' );   
 }

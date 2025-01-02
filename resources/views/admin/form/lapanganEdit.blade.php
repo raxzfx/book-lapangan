@@ -6,7 +6,7 @@
  <div class="card shadow mb-4">
   
     <div class="card-body">
-        <form class=" g-3 needs-validation" action="{{route('admin.form.updateLapangan',$lapang->id)}}" method="POST" novalidate>
+        <form class=" g-3 needs-validation" action="{{route('admin.form.updateLapangan',$lapang->id)}}" method="POST" enctype="multipart/form-data" novalidate>
 
             @csrf
             @method('PUT')
@@ -41,10 +41,52 @@
               </div>
             </div>
 
+               <!-- Menampilkan gambar lama -->
+            <div class="col-md-12 mb-2">
+              <label for="image" class="form-label">Gambar</label>
+              <div>
+                  <img src="{{ asset('uploads/lapangan/' . $lapang->image) }}" alt="Image" style="width: 150px; height: 100px;">
+              </div>
+              <div>
+                  <input type="file" class="form-control mt-2" id="image" name="image" accept="image/*">
+                  <div class="valid-feedback">
+                      Success!
+                  </div>
+                  <div class="invalid-feedback">
+                      Silakan unggah gambar baru jika diperlukan!
+                  </div>
+              </div>
+          </div>
+
+
+            <div class="col-md-12 mb-2">
+              <label for="validationCustom01" class="form-label">kota</label>
+              <input type="text" class="form-control" id="validationCustom01" name="kota" value="{{$lapang->kota}}" required>
+              <div class="valid-feedback">
+                success!
+              </div>
+              <div class="invalid-feedback">
+                silahkan masukan nama anda terlebih dahulu!
+              </div>
+            </div>
+
             <div class="col-md-12 mb-2 ">
               <label for="validationCustomUsername" class="form-label">lokasi</label>
               <div class="input-group has-validation"> 
                 <textarea class="form-control" name="lokasi"  aria-label="With textarea" required >{{ $lapang->lokasi }}</textarea>
+                <div class="valid-feedback">
+                    success!
+                  </div>
+                <div class="invalid-feedback">
+                 silahkan masukan no telp anda!
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-2 ">
+              <label for="validationCustomUsername" class="form-label">deskripsi</label>
+              <div class="input-group has-validation"> 
+                <textarea class="form-control" name="deskripsi" aria-label="With textarea">{{$lapang->deskripsi}}</textarea>
                 <div class="valid-feedback">
                     success!
                   </div>

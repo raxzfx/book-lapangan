@@ -15,8 +15,11 @@ return new class extends Migration
         $table->id();
         $table->string('nama_lapangan',255);
         $table->foreignId('kategori_lapangan')->references('id')->on('kategori')->onDelete('cascade');
+        $table->string('kota');
         $table->text('lokasi');
+        $table->text('deskripsi');
         $table->decimal('harga_perjam',10,2);
+        $table->string('image',255);
         $table->timestamps();  
         });
      

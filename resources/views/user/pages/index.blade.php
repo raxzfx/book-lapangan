@@ -11,7 +11,7 @@
             website that provides field booking services without having to come to the location
         </p>
        
-<form class="max-w-md mx-auto">   
+{{-- <form class="max-w-md mx-auto">   
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -21,7 +21,7 @@
         <input type="search" id="default-search" class="block w-full p-4 py-5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="looking for a fields..." required />
         <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-green-500  hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-5 py-3 transition ease-in-out"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
-</form>
+</form> --}}
 
     </div>
     <img src="{{asset('image/grass.jpg')}}" alt="" class="absolute top-0 left-0 object-cover w-full h-full z-0">
@@ -39,7 +39,7 @@
                  </h1>
             </div>
             <div class="text-sm">
-                <a href="" class="flex items-center text-sm">
+                <a href="{{route('user.pages.listFields')}}" class="flex items-center text-sm">
                      <h1 class="mr-3">
                     load more
                  </h1>
@@ -51,32 +51,48 @@
 
        <div class="grid grid-cols-3 gap-6 mt-5 mb-28">
 
-        @for ($i = 0; $i < 6; $i++)
+        @for ($i = 0; $i < count($lapangan) && $i <6; $i++)
         <!--card-->
-        <div class="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-custom-dark duration-300 ease-in-out">
             <a href="#">
-                <img class="rounded-t-lg" src="{{ asset('image/ground.webp') }}" alt="" />
+                <img class="rounded-t-lg h-52 w-full object-cover" src="{{ asset('uploads/lapangan/'. $lapangan[$i]->image) }}" alt="" />
             </a>
             <div class="p-5">
                 <p class="mb-4 text-xs">
-                    IDR 50.000,00/h
+                    IDR {{number_format($lapangan[$i]->harga_perjam,0,',','.')}}/h
                 </p>
-                <a href="{{route('user.pages.detailLapang')}}">
+                <a href="{{route('user.pages.show',$lapangan[$i]->id)}}">
                     <h5 class="mb-2 text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-                        Lapangan kece madep
+                        {{$lapangan[$i]->nama_lapangan}}
                     </h5>
                 </a>
                 <p class="mb-3 font-sm text-gray-700 dark:text-gray-400 opacity-75 truncate capitalize">
                     ini adalah lapngan yang lapangan juga <br />
                     lapangan semua lapangan lapngan lapnga
                 </p>
+                <div class="flex items-center">
+                    @if ($lapangan[$i]->kategori->kategori === 'basket')
+                         <i class="fa-solid fa-basketball mr-2"></i>
+                   <p>basketball</p> 
+                   @elseif ($lapangan[$i]->kategori->kategori === 'badminton')
+                   <img src="{{asset('image/shuttlecock (1).png')}}" class="w-5 h-5 mr-2" alt="">
+                   <p>badminton</p>
+                   @elseif ($lapangan[$i]->kategori->kategori === 'sepak bola')
+                   <i class="fa-solid fa-futbol mr-2"></i>
+                   <p>sepak bola</p>
+                   @elseif ($lapangan[$i]->kategori->kategori === 'futsal')
+                   <i class="fa-solid fa-futbol mr-2"></i>
+                   <p>futsal</p>
+                    @endif
+                   
+                </div>
             </div>
     
             <!-- Span Location -->
             <span
-                class="absolute flex items-center justify-center bg-white text-slate-900 px-1 w-32 py-2 text-xs font-medium rounded-full shadow-md hover:bg-sky-700 transition duration-200 top-4 left-4">
+                class="absolute flex items-center justify-center bg-white text-slate-900 hover:text-white px-1 w-32 py-2 text-xs font-medium rounded-full shadow-md hover:bg-green-700 transition duration-200 top-4 left-4">
                 <i class="fa-solid fa-location-dot mr-2 text-base"></i>
-                <p>Bandung</p>
+                <p>{{$lapangan[$i]->kota}}</p>
             </span>
         </div>
         <!--end card-->
@@ -90,7 +106,7 @@
 </section>
 
 <!--bawah card-->
-<section class="h-80 bg-green-500 dark:bg-gray-900 relative flex items-center justify-center ">
+<section class="h-80 bg-green-500 dark:bg-gray-900 relative flex items-center justify-center mb-4 ">
   <div class="container mx-auto text-left absolute top-0 left-0 p-4 z-10 px-28 py-6">
     <div class="capitalize font-bold mb-10 text-2xl mt-3">
       sportify category
@@ -152,22 +168,7 @@
 </section>
 
 
-  <!--bawah card-->
-<section class="min-h-screen bg-gray-50 dark:bg-gray-900 relative flex items-center justify-center">
-    <div class="container mx-auto text-center relative z-10">
-      <div class="relative inline-block">
-        <img src="{{asset('image/grass.jpg')}}" alt="Grass" class="rounded-3xl h-52 w-custom object-cover">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white space-y-4">
-          <h1 class="text-4xl font-bold mb-7">
-            Register with us
-          </h1>
-          <button class="bg-green-500 hover:bg-green-800 transition ease-in-out px-8 py-2 rounded-lg font-normal text-sm">
-            Register
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+
   
 <!--end Main Section-->
 

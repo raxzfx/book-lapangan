@@ -24,7 +24,7 @@
                             <th style="width: 3%;">no</th>
                             <th>nama</th>
                             <th>email</th>
-                            <th>no telp</th>
+                            <th>role</th>
                             <th>action</th>
                           
                         </tr>
@@ -34,7 +34,7 @@
                             <th style="width: 3%;">no</th>
                             <th>nama</th>
                             <th>email</th>
-                            <th>no telp</th>
+                            <th>role</th>
                             <th>action</th>
                           
                         </tr>
@@ -45,7 +45,7 @@
                             <td scope="row" style="width: 3%;">{{$loop->iteration}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->no_telp}}</td>
+                            <td>{{$user->role}}</td>
                             <td> 
                                 <!--edit-->
                                 <a href="{{route('admin.form.UserEdit',$user->id)}}" class="btn btn-success btn-circle ">

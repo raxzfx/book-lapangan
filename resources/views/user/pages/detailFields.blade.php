@@ -48,34 +48,69 @@
                     </ol>
                 </nav>
                 <!-- Gambar Utama -->
-                <img class="h-80 max-w-full rounded-t-lg" src="{{ asset('image/grass.jpg') }}" alt="image description">
+                <img class="h-80 w-[500px] rounded-lg object-cover" src="{{ asset('uploads/lapangan/'. $lapangan->image) }}" alt="image description">
+                <h1 class="mt-5 font-bold text-xl capitalize">
+                    lokasi
+                </h1>
+                <!-- Lokasi -->
+                <div class="mt-2 mb-3 flex items-center capitalize">
+                <i class=" fa-solid fa-location-dot mr-2"></i>
+                <p>{{$lapangan->lokasi}}, {{$lapangan->kota}}</p>
+                </div>
+
+                <hr class="border-gray-300 dark:border-gray-600 my-4">
+
+                <h1 class="text-xl font-bold mt-2 capitalize">
+                    fasilitas
+                </h1>
+
+                <div class="grid grid-cols-3 mb-20 capitalize">
+                     <div class="mt-3 flex items-center">
+                    <i class="fa-solid fa-utensils"></i>
+                    <p class="ml-2">kantin</p>
+                </div>
+
+                <div class="mt-3 flex items-center">
+                    <i class="fa-solid fa-car"></i>
+                    <p class="ml-2"> 
+                        parkir mobil
+                    </p>
+                </div>
+
+                <div class="flex items-center mt-3">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <p class="ml-2">
+                        parkir motor
+                    </p>
+                </div>
+                </div>
+                <div class="grid grid-cols-3 mt-3">
+                <div>
+
+                </div>
+                </div>
+               
             </div>
     
             <!-- Bagian Detail -->
             <div>
-                <h1 class="font-bold text-4xl mb-2">Lapangan Saparua</h1>
-                <p class="text-gray-600 mb-2">Basketball</p>
-                <h2 class="font-bold text-2xl text-red-600 mb-4">IDR 500,000.00</h2>
+                <h1 class="font-bold text-4xl mb-2">{{$lapangan->nama_lapangan}}</h1>
+                <p class="text-gray-600 mb-2">{{$lapangan->kategori->kategori}}</p>
+                <h2 class="font-bold text-2xl text-green-600 mb-4">IDR {{number_format($lapangan->harga_perjam,0,',','.')}}/H</h2>
                 <!-- Deskripsi -->
-                <div class="bg-gray-100 p-4 rounded-xl border border-gray-300">
-                    <p class="text-gray-700 text-justify leading-relaxed">
-                       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores perspiciatis ab repellat consequatur quod rerum impedit magni, pariatur, laborum vitae doloribus mollitia necessitatibus maiores accusamus! Enim unde, asperiores adipisci a aspernatur assumenda ut excepturi odit! Magni quaerat esse blanditiis alias expedita, quis tempora? Dolore, est. Animi vero doloremque quae repellendus obcaecati non aut totam reiciendis corrupti amet ipsum distinctio maxime enim magnam explicabo vitae reprehenderit a harum sapiente, recusandae illum!
+                <div class="bg-gray-100 p-4 rounded-xl border border-gray-300 w-full overflow-hidden">
+                    <p class="text-gray-700 text-justify leading-relaxed break-words">
+                        {{$lapangan->deskripsi}}
                     </p>
-                </div>
+                </div>                
                 <!-- Tombol -->
-                <button class="mt-4 bg-red-600 text-white py-2 px-6 rounded-lg hover:bg-red-700 transition">
-                    Cek Ketersediaan
+                <a href="{{route('user.pages.bookingUser')}}">
+                      <button class="mt-4 bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-800 transition">
+                    Booking
                 </button>
+                </a>
+              
             </div>
-            <div class="grid grid-cols-2 gap-4 -mt-32 mb-40">
-                <div>
-                    <img src="{{ asset('image/grass.jpg') }}" alt="" class="rounded-b-lg">
-                </div>
-                <div>
-                    <img src="{{ asset('image/grass.jpg') }}" alt="" class="rounded-b-lg">
-                </div>
-                </div>
-        </div>
     </div>
     
 </section>

@@ -12,9 +12,21 @@ use App\Http\Controllers\OwnerLapangController;
 use App\Http\Controllers\owner\DashboardOwnerController;
 use App\Http\Controllers\user\HomepageController;
 use App\Http\Controllers\user\DetailLapang;
+use App\Http\Controllers\owner\confirmOwnerController;
+use App\Http\Controllers\owner\manageOwnerController;
+use App\Http\Controllers\user\BookingUserController;
+use App\Http\Controllers\user\ListController;
+use App\Http\Controllers\user\ReceiptController;
+use App\Http\Controllers\owner\TestBookingController;
+use App\Http\Controllers\owner\StrukController;
 
+
+//landing page
 Route::get('/', [HomepageController::class, 'index'])->name('user.pages.index');
 
+Route::get('/login',function(){
+    return view('login');
+})->name('login');
 
 //admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -73,11 +85,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('owner')->name('owner.')->group(function () {
    //untuk menampilkan dashboard owner lapang
    Route::get('pages/index',[DashboardOwnerController::class, 'index'])->name('pages.index'); 
+   Route::get('pages/confirm',[confirmOwnerController::class, 'index'])->name('pages.confirm');
+   Route::post('pages/confirm/{id}',[confirmOwnerController::class, 'confirm'])->name('form.confirm');
+   Route::post('pages/cancel/{id}',[confirmOwnerController::class, 'cancel'])->name('form.cancel');
+
+   Route::get('pages/manage',[manageOwnerController::class, 'index'])->name('pages.manage');
+ Route::get('pages/testBooking',[TestBookingController::class, 'index'])->name('pages.testBooking');
+ Route::get('pages/testBooking/create',[TestBookingController::class, 'create'])->name('form.createTestBooking');
+ Route::post('pages/testBooking/store',[TestBookingController::class, 'store'])->name('form.storeTestBooking');
+ Route::get('pages/struk/{id}',[StrukController::class, 'index'])->name('pages.struk');
+ Route::get('/booking/confirm/search', [confirmOwnerController::class, 'index'])->name('pages.search');
 });
+
+Route::get('/lapangan/harga/{id}', [TestBookingController::class, 'getHarga']);
+
+
 
 Route::prefix('user')->name('user.')->group(function () {
-    Route::get('pages/detailLapang',[DetailLapang::class, 'index'])->name('pages.detailLapang');
+    Route::get('pages/detailLapang/{id}',[DetailLapang::class, 'show'])->name('pages.show');
+    Route::get('pages/bookingUser',[BookingUserController::class, 'index'])->name('pages.bookingUser');
+    Route::get('pagess/listFields',[ListController::class, 'index'])->name('pages.listFields');
+    Route::get('pages/receipt',[ReceiptController::class, 'index'])->name('pages.receipt');
 });
 
 
-require __DIR__.'/auth.php';
+
+
+
+
+

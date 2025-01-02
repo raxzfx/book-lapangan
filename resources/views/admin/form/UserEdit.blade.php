@@ -31,25 +31,26 @@
                silahkan masukan email anda!
               </div>
             </div>
-            <div class="col-md-12 mb-2 ">
-              <label for="validationCustomUsername" class="form-label">no telp</label>
-              <div class="input-group has-validation">
-                
-                <input type="number" class="form-control" id="validationCustomUsername" value="{{$user->no_telp}}" aria-describedby="inputGroupPrepend" name="no_telp" required>
-                <div class="valid-feedback">
-                    success!
-                  </div>
-                <div class="invalid-feedback">
-                 silahkan masukan no telp anda!
-                </div>
+            <div class="col-md-12 mb-2">
+              <label for="validationCustom02" class="form-label">password</label>
+              <input type="password" class="form-control" id="validationCustom02" value="{{$user->password}}" name="password" >
+              <div class="valid-feedback">
+                success!
+              </div>
+              <div class="invalid-feedback">
+               silahkan masukan email anda!
               </div>
             </div>
+          
             <div class="col-md-12 mb-4">
                 <label for="role">Role</label>
                 <select name="role" class="form-control" required>
-                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
-                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                    <option value="owner_lapang" {{ $user->role === 'owner_lapang' ? 'selected' : '' }}>Owner Lapang</option>
+
+                  @foreach ($roleOption as $role )
+                       <option value="user" {{ $user->role  }}>{{$role}}</option>
+                  @endforeach 
+               
+                   
                 </select>
                 <div class="valid-feedback">
                  success!
